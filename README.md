@@ -7,5 +7,5 @@
 
 `Back-end: Java;`
 
-- `iamSlightlyWind/*` are just some private bigass repos I kept for all sorts of things I develop on my own, and also temporary practice files.
-- If you see me active with DRP mentioning hidden repos, then there might not be anything that will interest you here, at least not for now.
+- You are looking at `iamSlightlyWind/*`, some bigass private repos I kept for all sorts of things I make on my own, and also temporary files.
+- My DRP mentions hidden repos, but there won't be anything that might interest you as of right now.

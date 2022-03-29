@@ -1,7 +1,10 @@
-- 👋 Hi, this is @iamSlightlyWind.
-- Self-taught programmer, linux geek, currently working on TheMajorOnes's backend and server.
- 
+<br/>
+<p align="left">
+  <a href="https://TheMajorOnes.dev/">
+  <img width="49.5%" src="https://github-readme-stats.vercel.app/api?username=iamSlightlyWind&show_icons=true&theme=gruvbox&hide_border=true" />
+    <img width="49.5%" src="https://github-readme-streak-stats.herokuapp.com/?user=iamSlightlyWind&theme=gruvbox&hide_border=true" />
+  </a>
+</p>
+<br>
 
-
-- You are looking at `iamSlightlyWind/*`, some bigass private repos I kept for all sorts of things I make on my own, but also temporary dumps.
-- DRP mentions hidden repos, but there won't be anything that might interest you as of right now.
+[![Wind Slightly' Activity Graph](https://activity-graph.herokuapp.com/graph?username=iamSlightlyWind&custom_title=Wind%20Slightly's%20Contribution%20Graph&theme=gruvbox&bg_color=282828&hide_border=true&line=d1a01f&point=c58545)](https://TheMajorOnes.dev)

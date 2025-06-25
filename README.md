@@ -9,4 +9,4 @@
 
 #
 <p align="center"> <strong>Check out <a href="https://gist.github.com/iamSlightlyWind">my gists</a> for Linux hardware acceleration and Wine guides on Android,</strong></p>
-<p align="center"> <strong>Or check out my CV <a href="https://www.topcv.vn/xem-cv/B1QMDAMAVlQDAQQMUFEBBlpVAlUGBg0FBlAAWw0b81">here.</a></strong></p>
+<p align="center"> <strong>Or check out my CV <a href="https://www.topcv.vn/xem-cv/C1QBUFRQVQZSUwpVV1ZXUFUABQddXQIGDgADAQ90f0">here.</a></strong></p>

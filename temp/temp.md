@@ -267,3 +267,81 @@ handlerPublishInvoices()
 1. ✅ **2 API đồng bộ** gọi trực tiếp với endpoint rõ ràng
 2. ✅ **3 API async** qua RabbitMQ, nhưng **worker xử lý KHÔNG NẰM TRONG sdsec**
 3. ✅ **CreateInvoicesListener** là worker duy nhất liên quan invoice trong sdsec, nhưng nó CHỈ tạo invoice và gọi lại `handlerPublishInvoices()` - sau đó lại đẩy vào queue khác
+
+------------------------------------------------------------------
+
+Dựa trên phân tích của tôi về trang `/easy-pos/ecommerce/e-commerce-invoice` và các component liên quan, đây là **tất cả các API** có thể được gọi từ trang này và các trang con:
+
+## **Trang Hóa Đơn Chính (`invoice-ecommerce.component.ts`) - Các API:**
+
+### **Quản Lý Hóa Đơn:**
+1. **`GET /e-commerce/invoice/get-with-paging`** - Lấy danh sách hóa đơn phân trang (dòng 367)
+2. **`GET /e-commerce/invoice/get-status-recent/{comId}`** - Lấy lỗi hóa đơn gần đây (dòng 296)
+3. **`POST /e-commerce/invoice/publish-list`** - Phát hành danh sách hóa đơn (dòng 498, 963)
+4. **`PUT /e-commerce/invoice/delete/{id}`** - Xóa hóa đơn ecommerce (dòng 514)
+5. **`POST /e-commerce/invoice/send-mail`** - Gửi hóa đơn qua email (dòng 523)
+6. **`GET /e-commerce/invoice/view-pdf`** - Xem hóa đơn PDF (dòng 540)
+7. **`GET /e-commerce/invoice/export-invoices-detail`** - Xuất chi tiết hóa đơn (dòng 1049)
+8. **`POST /e-commerce/invoice/export-invoice`** - Xuất hóa đơn (dòng 1037)
+9. **`POST /client/page/invoice/get-digest-data`** - Lấy dữ liệu digest để ký (dòng 776)
+10. **`POST /client/page/invoice/sign-with-digest-data`** - Phát hành hóa đơn với chứng thư số (dòng 799)
+
+### **Cấu Hình Ecommerce:**
+11. **`GET /e-commerce/get-ecommerce-configs/{comId}`** - Lấy cấu hình ecommerce (dòng 1300)
+
+### **Quản Lý Sàn/Cửa Hàng:**
+12. **`GET /e-commerce/market-account/get-all-group-platform`** - Lấy tất cả sàn và cửa hàng (dòng 226)
+
+---
+
+## **Trang Chi Tiết/Chỉnh Sửa Hóa Đơn (`invoice-ecommerce-detail.component.ts`) - Các API:**
+
+### **Thao Tác Chi Tiết Hóa Đơn:**
+13. **`POST /e-commerce/invoice/detail`** - Lấy hóa đơn theo ID (dòng 323)
+14. **`POST /e-commerce/invoice/issue`** - Lưu/Cập nhật hóa đơn (dòng 681, 701, 732)
+
+### **Quản Lý Khách Hàng:**
+15. **`GET /client/page/customer/get-all-with-paging`** - Lấy danh sách khách hàng phân trang (dòng 465)
+16. **`GET /client/page/customer/by-id/{customerId}`** - Lấy khách hàng theo ID (dòng 529)
+
+### **Quản Lý Sản Phẩm:**
+17. **`GET /client/page/product/get-all-product-unit`** - Lấy đơn vị sản phẩm (dòng 158)
+
+### **Cấu Hình:**
+18. **`GET /e-commerce/get-ecommerce-configs/{comId}`** - Lấy cấu hình ecommerce (dòng 450)
+
+---
+
+## **Các API Từ Component Modal Con:**
+
+### **InvoiceEcommerceModelViewComponent:**
+19. **`POST /e-commerce/invoice/detail`** - Lấy chi tiết hóa đơn cho modal xem (gọi từ dòng 471-482)
+
+### **Các Thao Tác Modal (qua Services):**
+20. **Thao tác chứng thư số/ký số** - Xử lý chữ ký điện tử (dòng 854, 913)
+21. **Thao tác cấu hình công ty** - Lấy cấu hình công ty
+
+---
+
+## **Tổng Kết Các API Endpoint Theo Danh Mục:**
+
+### **Quản Lý Hóa Đơn (10 APIs)**
+- Liệt kê, xem, phát hành, xóa, gửi email, xuất hóa đơn
+- Thao tác chữ ký số
+
+### **Cấu Hình Ecommerce (2 APIs)**  
+- Lấy cấu hình công ty ecommerce
+- Lấy kết nối sàn/cửa hàng
+
+### **Quản Lý Khách Hàng (2 APIs)**
+- Lấy danh sách khách hàng có phân trang
+- Lấy chi tiết khách hàng theo ID
+
+### **Quản Lý Sản Phẩm (1 API)**
+- Lấy đơn vị sản phẩm
+
+### **Bảo Mật/Xác Thực (2 APIs)**
+- Lấy dữ liệu digest cho ký số
+- Ký với chứng thư số
+
+**Tổng cộng: ~20 API endpoint riêng biệt** có thể được gọi từ trang e-commerce-invoice và các component con của nó.
